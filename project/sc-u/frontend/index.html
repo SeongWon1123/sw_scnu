@@ -9,7 +9,8 @@
       body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow: hidden; }
     </style>
     <!-- 카카오 맵 스크립트 직접 삽입 -->
-    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=48dcc240dae610cf8cc8ec3aa46a0087&libraries=services&autoload=false"></script>
+    <!-- appkey comes from frontend/.env → VITE_KAKAO_MAP_KEY -->
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=%VITE_KAKAO_MAP_KEY%&libraries=services&autoload=false"></script>
   </head>
   <body>
     <div id="root"></div>
