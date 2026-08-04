@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SC&U 프로젝트 제안서</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: #f5f5f5;
+    color: #1a1a1a;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: white;
+    margin: 20px auto;
+    padding: 20mm 18mm;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+  }
+
+  /* 표지 */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 297mm;
+    background: linear-gradient(160deg, #1a3a5c 0%, #0f2440 60%, #0a1628 100%);
+    color: white;
+    text-align: center;
+    padding: 40px;
+    margin-bottom: 20px;
+  }
+
+  .cover .badge {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+  }
+
+  .cover .logo {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: -2px;
+    line-height: 1;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #ffffff, #7ec8f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .cover .subtitle {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 60px;
+    letter-spacing: 1px;
+  }
+
+  .cover .tagline {
+    font-size: 26px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.4;
+    margin-bottom: 50px;
+    max-width: 420px;
+  }
+
+  .cover .meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    line-height: 2;
+  }
+
+  /* 섹션 공통 */
+  .section { margin-bottom: 36px; }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #0f2440;
+    border-left: 5px solid #2196F3;
+    padding-left: 14px;
+    margin-bottom: 20px;
+  }
+
+  .section-title .num {
+    color: #2196F3;
+    font-size: 13px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  p { margin-bottom: 12px; color: #333; }
+
+  /* 문제 카드 */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .problem-card {
+    background: #fff8f0;
+    border: 1px solid #ffe0b2;
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .problem-card .icon { font-size: 28px; margin-bottom: 8px; }
+  .problem-card .title { font-weight: 700; font-size: 14px; color: #e65100; margin-bottom: 6px; }
+  .problem-card .desc { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* 비교표 */
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 16px;
+    font-size: 13px;
+  }
+
+  .compare-table thead tr {
+    background: #0f2440;
+    color: white;
+  }
+
+  .compare-table th {
+    padding: 12px 14px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .compare-table th:first-child { text-align: left; border-radius: 8px 0 0 0; }
+  .compare-table th:last-child { border-radius: 0 8px 0 0; background: #2196F3; }
+
+  .compare-table td {
+    padding: 11px 14px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .compare-table td:first-child { text-align: left; font-weight: 500; color: #333; }
+  .compare-table tr:nth-child(even) td { background: #f8f9fa; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table td:last-child { background: #e3f2fd; font-weight: 600; color: #0d47a1; }
+
+  .check { color: #43a047; font-size: 16px; }
+  .cross { color: #e53935; font-size: 16px; }
+  .half { color: #fb8c00; font-size: 13px; }
+
+  /* 기능 카드 */
+  .feature-list { display: flex; flex-direction: column; gap: 14px; margin-top: 16px; }
+
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #f8fbff;
+    border: 1px solid #d0e8ff;
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .feature-item .f-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    width: 48px;
+    text-align: center;
+  }
+
+  .feature-item .f-content .f-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #0f2440;
+    margin-bottom: 4px;
+  }
+
+  .feature-item .f-content .f-tag {
+    display: inline-block;
+    background: #2196F3;
+    color: white;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .feature-item .f-content .f-desc { font-size: 13px; color: #555; line-height: 1.6; }
+
+  /* AI 하이라이트 */
+  .ai-box {
+    background: linear-gradient(135deg, #0f2440, #1565c0);
+    color: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 16px;
+  }
+
+  .ai-box .ai-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .ai-box .ai-sub { font-size: 13px; color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+
+  .chat-bubble {
+    background: rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .chat-bubble.user {
+    background: rgba(255,255,255,0.2);
+    margin-left: 30px;
+    position: relative;
+  }
+
+  .chat-bubble.user::before {
+    content: '👤 사용자';
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 4px;
+  }
+
+  .chat-bubble.ai {
+    background: rgba(33,150,243,0.35);
+    margin-right: 30px;
+  }
+
+  .chat-bubble.ai::before {
+    content: '🤖 AI';
+    display: block;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 4px;
+  }
+
+  /* 타임라인 */
+  .timeline { margin-top: 16px; }
+
+  .tl-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+
+  .tl-dot {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #2196F3;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+
+  .tl-content .tl-period {
+    font-size: 11px;
+    color: #2196F3;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .tl-content .tl-title { font-weight: 700; font-size: 14px; color: #0f2440; }
+  .tl-content .tl-desc { font-size: 12px; color: #666; margin-top: 2px; }
+
+  /* 구분선 */
+  .divider { border: none; border-top: 1px solid #eee; margin: 28px 0; }
+
+  /* 하단 강조 */
+  .highlight-box {
+    background: #e8f5e9;
+    border-left: 5px solid #43a047;
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin-top: 16px;
+  }
+
+  .highlight-box .h-title { font-weight: 700; color: #2e7d32; margin-bottom: 4px; }
+  .highlight-box .h-desc { font-size: 13px; color: #388e3c; }
+
+  .footer-note {
+    text-align: center;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { margin: 0; box-shadow: none; }
+    .cover { page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 표지 -->
+<div class="page cover">
+  <div class="badge">2026 SW 융합캡스톤디자인 프로젝트 제안</div>
+  <div class="logo">SC&U</div>
+  <div class="subtitle">Suncheon Campus & You</div>
+  <div class="tagline">
+    "휠체어 사용자도 캠퍼스를<br>자유롭게 다닐 수 있도록"<br>
+    <span style="font-size:18px; font-weight:400; color:rgba(255,255,255,0.8)">AI 기반 장애인 접근성 안내 시스템</span>
+  </div>
+  <div class="meta">
+    순천대학교 웰니스 메이커조<br>
+    2026년 1학기
+  </div>
+</div>
+
+<!-- 본문 1: 문제 제기 -->
+<div class="page">
+  <div class="section">
+    <div class="section-title">
+      <span class="num">01 / 왜 이 서비스가 필요한가?</span>
+      지금 캠퍼스에서 무슨 일이 일어나고 있나
+    </div>
+    <p>순천대학교 캠퍼스에는 장애인 편의시설이 분명히 존재합니다. 그러나 <strong>어디에 있는지, 지금 사용 가능한지</strong>를 알려주는 정보가 어디에도 없습니다.</p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">🚾</div>
+        <div class="title">화장실 정보가 없다</div>
+        <div class="desc">장애인 화장실이 건물 어느 층, 어느 쪽에 있는지 지도에도, 학교 홈페이지에도 나와 있지 않습니다.</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🅿️</div>
+        <div class="title">주차 정보도 없다</div>
+        <div class="desc">장애인 주차구역 위치를 모르면 캠퍼스 입구에서 한참 헤매야 합니다.</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🚧</div>
+        <div class="title">경사로·계단 정보 없음</div>
+        <div class="desc">휠체어로 이동 가능한 경로인지 아닌지 가보기 전까지는 알 수 없습니다.</div>
+      </div>
+      <div class="problem-card">
+        <div class="icon">❌</div>
+        <div class="title">고장 정보가 공유 안 됨</div>
+        <div class="desc">엘리베이터가 고장 나도 직접 가보기 전까지는 알 수 없어 헛걸음을 합니다.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:20px; background:#fff3e0; border-left-color:#ff9800;">
+      <div class="h-title" style="color:#e65100;">💬 실제로 있었던 일</div>
+      <div class="h-desc" style="color:#bf360c;">"공대 건물에 장애인 화장실이 있다고 해서 갔더니 잠겨 있었어요. 다시 다른 건물로 가야 했는데, 어디에 있는지 몰라서 한참 헤맸습니다." — 재학생 인터뷰</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title">
+      <span class="num">02 / 지금 있는 서비스와 비교</span>
+      왜 카카오맵으로는 부족한가?
+    </div>
+    <p>이미 카카오맵, 네이버 지도 같은 훌륭한 서비스가 있습니다. 하지만 이런 서비스들이 <strong>해결하지 못하는 문제</strong>가 있습니다.</p>
+
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>비교 항목</th>
+          <th>카카오맵</th>
+          <th>네이버 지도</th>
+          <th>공공데이터</th>
+          <th>SC&U (우리 서비스)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>장애인 화장실 층별 위치</td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="check">✓ 직접 조사</span></td>
+        </tr>
+        <tr>
+          <td>접근 가능 여부 세부 정보<br><small style="color:#999">(문 폭, 경사 유무 등)</small></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="check">✓ 포함</span></td>
+        </tr>
+        <tr>
+          <td>캠퍼스 내부 경로 안내</td>
+          <td><span class="half">△ 일부만</span></td>
+          <td><span class="half">△ 일부만</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="check">✓ 접근성 경로</span></td>
+        </tr>
+        <tr>
+          <td>고장/불편 실시간 제보</td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="check">✓ 가능</span></td>
+        </tr>
+        <tr>
+          <td>데이터 최신성</td>
+          <td><span class="half">△ 비정기</span></td>
+          <td><span class="half">△ 비정기</span></td>
+          <td><span class="cross">✗ 수년 단위</span></td>
+          <td><span class="check">✓ 커뮤니티 갱신</span></td>
+        </tr>
+        <tr>
+          <td>말로 물어보기 (AI 질문)</td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="cross">✗</span></td>
+          <td><span class="check">✓ AI 챗봇</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box">
+      <div class="h-title">핵심 차이점</div>
+      <div class="h-desc">기존 서비스는 "있음/없음"만 표시합니다. SC&U는 <strong>실제로 이동할 수 있는지</strong>까지 알려줍니다. 직접 발로 뛰어 수집한 데이터 + AI가 이 서비스의 핵심 경쟁력입니다.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 본문 2: 우리가 만들 것 -->
+<div class="page">
+  <div class="section">
+    <div class="section-title">
+      <span class="num">03 / 우리가 만들 서비스</span>
+      SC&U가 제공하는 기능
+    </div>
+    <p>복잡한 기술보다 <strong>실제로 사용 가능한 서비스</strong>를 먼저 만들겠습니다. 아래 3가지가 핵심입니다.</p>
+
+    <div class="feature-list">
+      <div class="feature-item">
+        <div class="f-icon">🗺️</div>
+        <div class="f-content">
+          <div class="f-tag">핵심 기능 1</div>
+          <div class="f-title">캠퍼스 접근성 지도</div>
+          <div class="f-desc">카카오맵 위에 장애인 화장실, 주차공간, 엘리베이터, 경사로 위치를 핀으로 표시합니다. 핀을 누르면 "전동휠체어 진입 가능", "문 폭 90cm" 같은 세부 정보가 나옵니다. 팀이 직접 현장 조사한 데이터를 사용합니다.</div>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="f-icon">📢</div>
+        <div class="f-content">
+          <div class="f-tag">핵심 기능 2</div>
+          <div class="f-title">실시간 불편 제보 시스템</div>
+          <div class="f-desc">엘리베이터가 고장났거나, 화장실 문이 잠겼거나, 공사로 통로가 막혔을 때 사용자가 직접 제보할 수 있습니다. 제보는 지도에 바로 반영되어 다른 사용자가 확인할 수 있습니다.</div>
+        </div>
+      </div>
+
+      <div class="feature-item">
+        <div class="f-icon">🤖</div>
+        <div class="f-content">
+          <div class="f-tag">핵심 기능 3 (차별점)</div>
+          <div class="f-title">AI에게 말로 물어보기</div>
+          <div class="f-desc">지도를 찾아보기 어려운 분들을 위해 채팅으로 질문할 수 있습니다. "도서관 근처 장애인 화장실 어디야?"라고 물어보면 AI가 데이터베이스를 검색해서 바로 답해줍니다.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title">
+      <span class="num">04 / AI 기능은 어떻게 동작하나?</span>
+      말로 물어보면 AI가 직접 찾아준다
+    </div>
+
+    <div class="ai-box">
+      <div class="ai-title">🤖 AI 챗봇 실제 대화 예시</div>
+      <div class="ai-sub">복잡한 지도를 찾지 않아도, 그냥 말로 물어보면 됩니다</div>
+
+      <div class="chat-bubble user">도서관 1층에 휠체어로 들어갈 수 있는 화장실 있어?</div>
+      <div class="chat-bubble ai">네! 도서관 1층 정문 기준 오른쪽 복도 끝에 장애인 화장실이 있습니다. 전동휠체어도 진입 가능한 크기(문폭 95cm)입니다. 단, 지난주 사용자 제보에 따르면 자동문이 느리게 작동 중이라고 합니다.</div>
+      <div class="chat-bubble user">공대 건물 중에 장애인 주차장 제일 가까운 데가 어디야?</div>
+      <div class="chat-bubble ai">공대 2관 정문에서 약 30m 거리에 장애인 지정 주차구역(3면)이 있습니다. 경사로가 있어 휠체어로 바로 진입 가능합니다.</div>
+    </div>
+
+    <p style="margin-top:14px; font-size:13px; color:#666;">※ 이 기능은 데이터베이스에 저장된 실제 현장 조사 정보를 AI가 읽어서 답변하는 방식입니다. 허구의 정보를 만들어내지 않고, 팀이 직접 수집한 데이터만 사용합니다.</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="section">
+    <div class="section-title">
+      <span class="num">05 / 개발 계획</span>
+      1년 동안 단계별로 만들어갑니다
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">1</div>
+        <div class="tl-content">
+          <div class="tl-period">1~3개월차</div>
+          <div class="tl-title">데이터 정리 & 기초 시스템 구축</div>
+          <div class="tl-desc">현장 조사한 데이터를 체계적으로 데이터베이스에 입력. 지도에 핀 표시하는 기본 기능 완성.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">2</div>
+        <div class="tl-content">
+          <div class="tl-period">4~6개월차</div>
+          <div class="tl-title">제보 시스템 & 사용자 기능</div>
+          <div class="tl-desc">불편 제보 기능, 사용자 로그인, 관리자 승인 시스템 개발.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">3</div>
+        <div class="tl-content">
+          <div class="tl-period">7~9개월차</div>
+          <div class="tl-title">AI 챗봇 연동</div>
+          <div class="tl-desc">말로 물어보는 AI 기능 개발 및 실제 데이터와 연동. 정확도 테스트.</div>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">4</div>
+        <div class="tl-content">
+          <div class="tl-period">10~12개월차</div>
+          <div class="tl-title">실제 사용자 테스트 & 발표</div>
+          <div class="tl-desc">장애 학생·교직원 대상 테스트, 피드백 반영, 최종 완성 및 발표 준비.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <div class="h-title">📌 범위에 대한 솔직한 이야기</div>
+    <div class="h-desc">
+      건물 내부에서 실시간으로 내 위치를 추적하는 기능(GPS가 안 되는 실내 내비게이션)은 이번 프로젝트에 포함하지 않습니다. 이는 대기업도 수억 원을 투자하는 기술입니다. 대신 직접 조사한 정확한 정보를 잘 보여주는 것, 그리고 AI로 쉽게 찾을 수 있게 하는 것에 집중합니다. 이것만으로도 지금 캠퍼스에 없는 서비스입니다.
+    </div>
+  </div>
+
+  <div class="footer-note">
+    SC&U — Suncheon Campus & You | 순천대학교 웰니스 메이커조 | 2026
+  </div>
+</div>
+
+</body>
+</html>
